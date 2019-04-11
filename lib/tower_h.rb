@@ -10,8 +10,8 @@ class Game
     @coord = []
     @tower = {
       1=>[arr_1, arr_2, arr_3], 
-      2=>[[], [], []], 
-      3=>[[], [], []] 
+      2=>[], 
+      3=>[] 
     }
     play
   end 
@@ -33,34 +33,29 @@ class Game
   end 
 
   def render 
-    spacing_1 = {1=>spaces(tower[1]}
-    spacing_2 = spaces(tower[2])
-    spacing_3 = spaces(tower[3])
+    # Rendering needs some serious work 
+    # spacing_1 = {1=>spaces(tower[1][0]), 2=>spaces(tower[1][1]), 3=>spaces(tower[2][2])}
+    # spacing_2 = {1=>spaces(tower[2][0]), 2=>spaces(tower[2][1]), 3=>spaces(tower[2][2])}
+    # spacing_3 = {1=>spaces(tower[3][0]), 2=>spaces(tower[3][1]), 3=>spaces(tower[3][2])}
 debugger 
     system("clear")
-    puts "#{spacing_1[2].join}" + "   #{spacing_2[2].join}" + "   #{spacing_3[2].join}" 
-    puts "#{spacing_1[1].join}" + "   #{spacing_2[1].join}" + "   #{spacing_3[1].join}"       
-    puts "#{spacing_1[0].join}" + "   #{spacing_2[0].join}" + "   #{spacing_3[0].join}"  
+    puts "#{tower[1][2]}" + "   #{tower[2][2]}" + "   #{tower[3][2]}" 
+    puts "#{tower[1][1]}" + "   #{tower[2][1]}" + "   #{tower[3][1]}"       
+    puts "#{tower[1][0]}" + "   #{tower[2][0]}" + "   #{tower[3][0]}"  
     puts     "Tower 1"  + "      " + "Tower 2" + "          " + "Tower 3"
    end 
 
-  def spaces(arr)
-    # debugger 
-    spaced_arr = []
-    arr.each_with_index do |level, idx|
-      space = []
-      if level != arr_1
-        # debugger
-        num = (arr_1.length - level.length) 
-        num.times {space << " "}
-        split = space.length / 2
-        spaced_arr << space[0...split] + level + space[split..-1]
-      else 
-        spaced_arr << level
-      end 
-    end
-    spaced_arr
-  end 
+  # def spaces(arr)
+  #   space = []
+  #   if arr != arr_1
+  #     # debugger
+  #     num = (arr_1.length - arr.length) 
+  #     num.times {space << " "}
+  #     split = space.length / 2
+  #     return space[0...split] + arr + space[split..-1]
+  #   end 
+  #   arr
+  # end 
 
   def prompt
     puts "Choose the top tile that you would like to move."
@@ -101,7 +96,6 @@ debugger
     tile = tower[arr[0]].pop
     @tower[arr[1]].pop
     @tower[arr[1]].push(tile)
-    # @tower[arr[0]].push([])
   end 
     
   def won?
